@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { Link, router } from "expo-router";
 
-const API_URL = "http://172.22.60.250:5000/api/auth"; // your backend
+const API_URL = "http://172.22.60.96:5000/api/auth"; // your backend
 
 export default function SignUp() {
   const { width } = useWindowDimensions();

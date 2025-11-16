@@ -365,6 +365,81 @@ def get_safe_route():
             "message": str(e)
         }), 500
 
+@app.route('/getPaths', methods=['POST'])
+def get_paths():
+    """Endpoint that returns path coordinates for navigation"""
+    try:
+        data = request.get_json()
+        source = data.get('source')
+        destination = data.get('destination')
+        
+        if not source or not destination:
+            return jsonify({
+                "status": "error",
+                "message": "Source and destination are required"
+            }), 400
+        
+        print(f"\n🚀 Path request: {source} → {destination}")
+        
+        # Load data if not already loaded
+        initialize_data()
+        
+        # Geocode locations
+        source_point = get_location(source)
+        dest_point = get_location(destination)
+        
+        if not source_point or not dest_point:
+            return jsonify({
+                "status": "error",
+                "message": "Could not geocode one or both locations"
+            }), 400
+        
+        # Find routes
+        safest_path, fastest_path, unsafe_path, orig_node, dest_node = find_routes(
+            G, source_point, dest_point
+        )
+        
+        if not safest_path:
+            return jsonify({
+                "status": "error",
+                "message": "No route found between the locations"
+            }), 404
+        
+        # Calculate stats and coordinates for each path
+        safe_dist, safe_crime = calculate_path_stats(safest_path, G) if safest_path else (None, None)
+        fast_dist, fast_crime = calculate_path_stats(fastest_path, G) if fastest_path else (None, None)
+        unsafe_dist, unsafe_crime = calculate_path_stats(unsafe_path, G) if unsafe_path else (None, None)
+        
+        # Convert node paths to coordinate arrays [lat, lon]
+        safest_coords = [[G.nodes[n]['y'], G.nodes[n]['x']] for n in safest_path] if safest_path else []
+        fastest_coords = [[G.nodes[n]['y'], G.nodes[n]['x']] for n in fastest_path] if fastest_path else []
+        unsafe_coords = [[G.nodes[n]['y'], G.nodes[n]['x']] for n in unsafe_path] if unsafe_path else []
+        
+        return jsonify({
+            "status": "success",
+            "safest_path": safest_coords,
+            "fastest_path": fastest_coords,
+            "unsafe_path": unsafe_coords,
+            "safest_distance_km": round(safe_dist, 2) if safe_dist else None,
+            "fastest_distance_km": round(fast_dist, 2) if fast_dist else None,
+            "unsafe_distance_km": round(unsafe_dist, 2) if unsafe_dist else None,
+            "source": source_point,
+            "destination": dest_point
+        })
+        
+    except FileNotFoundError as e:
+        return jsonify({
+            "status": "error",
+            "message": f"Crime data file not found. Please ensure {CRIME_DATA_PATH} exists."
+        }), 500
+    except Exception as e:
+        print(f"❌ Error in get_paths: {e}")
+        print(traceback.format_exc())
+        return jsonify({
+            "status": "error",
+            "message": str(e)
+        }), 500
+
 @app.route('/maps/<filename>', methods=['GET'])
 def serve_map(filename):
     """Serve generated map HTML files"""

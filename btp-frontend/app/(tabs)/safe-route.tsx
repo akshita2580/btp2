@@ -18,7 +18,7 @@ import { Route, AlertCircle } from 'lucide-react-native';
 // Backend API URL - Update this to match your backend server
 // For local development, use your machine's IP address
 // For production, use your deployed backend URL
-const API_BASE_URL = 'http://172.22.60.250:8000'; // Change to your server IP, e.g., 'http://192.168.1.100:8000'
+const API_BASE_URL = 'http://172.22.60.96:8000'; // Change to your server IP, e.g., 'http://192.168.1.100:8000'
 
 interface RouteResponse {
   status: string;
