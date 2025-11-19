@@ -15,7 +15,7 @@ import { Link, useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CheckCircle } from "lucide-react-native";
 
-const API_URL = "http://172.22.60.96:5000/api/auth";
+const API_URL = "http://10.101.102.178:5000/api/auth";
 
 export default function SignIn() {
   const { width } = useWindowDimensions();

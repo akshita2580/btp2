@@ -38,7 +38,7 @@ import {
 } from '../../utils/geo';
 
 // Backend API URL - Update this to match your backend server
-const API_BASE_URL = 'http://172.22.60.96:8000';
+const API_BASE_URL = 'http://10.101.102.178:8000';
 
 interface PathResponse {
   status: string;

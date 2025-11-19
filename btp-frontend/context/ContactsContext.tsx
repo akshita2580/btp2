@@ -24,7 +24,7 @@ interface ContactsContextType {
 }
 
 // ⚠️ IMPORTANT: Use your actual IPv4 address (check by running `ipconfig` on your PC)
-const API_BASE_URL = 'http://172.22.60.96:5000/api';
+const API_BASE_URL = 'http://10.101.102.178:5000/api';
 
 const ContactsContext = createContext<ContactsContextType | undefined>(undefined);
 

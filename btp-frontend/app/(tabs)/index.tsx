@@ -37,7 +37,7 @@ export default function HomeScreen() {
   };
 
   const handleSOSPress = () => {
-    console.log('SOS button pressed');
+    router.push('/emergency-sms');
   };
 
   const handleEmergencyContact = () => {
@@ -45,7 +45,7 @@ export default function HomeScreen() {
   };
 
   const handleTrackMe = () => {
-    console.log('Safe Path button pressed');
+    router.push('/path');
   };
 
   return (

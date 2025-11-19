@@ -27,13 +27,7 @@ export default function TabLayout() {
           tabBarIcon: ({ size, color }) => <Home size={size} color={color} />,
         }}
       />
-      <Tabs.Screen
-        name="safe-route"
-        options={{
-          title: 'Safe Route',
-          tabBarIcon: ({ size, color }) => <Route size={size} color={color} />,
-        }}
-      />
+      
       <Tabs.Screen
         name="contacts"
         options={{
@@ -53,6 +47,13 @@ export default function TabLayout() {
         options={{
           title: 'Record',
           tabBarIcon: ({ size, color }) => <Mic size={size} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="path"
+        options={{
+          title: 'Safe Route',
+          tabBarIcon: ({ size, color }) => <Route size={size} color={color} />,
         }}
       />
       <Tabs.Screen
