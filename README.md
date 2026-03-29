@@ -1,4 +1,4 @@
-# 🌸 .Sos and Safe Route Detection 
+# 🌸 SOS and Safe Route Detection 
 
 Flask-based REST API for real-time safe route detection using crime data, OSMnx, and NetworkX.
 
