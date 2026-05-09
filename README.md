@@ -204,8 +204,3 @@ To use a different city:
 
 3. Restart the server (map graph will be downloaded on first request)
 
-## License
-
-This project is part of the BTP (B.Tech Project) Safe Route Detection System.
-
-
